@@ -9,28 +9,28 @@ const RouteWrapper = ({
   isPrivate,
   ...rest
 }) => {
-  // const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token');
 
-  // if (!token && isPrivate) {
-  //   return <Redirect to="/login" />;
-  // }
+  if (!token && isPrivate) {
+    return <Redirect to="/login" />;
+  }
 
-  // if (token && !isPrivate) {
-  //   return <Redirect to="/" />;
-  // }
+  if (token && !isPrivate) {
+    return <Redirect to="/" />;
+  }
 
-  // if (isPrivate) {
-  return (
-    <Route
-      {...rest}
-      render={props => (
-        <Dashboard>
-          <Component {...props} />
-        </Dashboard>
-      )}
-    />
-  );
-  // }
+  if (isPrivate) {
+    return (
+      <Route
+        {...rest}
+        render={props => (
+          <Dashboard>
+            <Component {...props} />
+          </Dashboard>
+        )}
+      />
+    );
+  }
 
   return (
     <Route
