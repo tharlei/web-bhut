@@ -5,6 +5,7 @@ import Route from './Route';
 import Login from '../pages/Login'
 import CarsIndex from '../pages/Cars/Index'
 import CarsNew from '../pages/Cars/New'
+import CarsEdit from '../pages/Cars/Edit'
 
 const Routes = () => {
   return (
@@ -12,6 +13,7 @@ const Routes = () => {
       <Route path='/' exact component={CarsIndex} isPrivate />
       <Route path='/login' component={Login} />
       <Route path='/cars/new' component={CarsNew} isPrivate />
+      <Route path='/cars/:id' component={CarsEdit} isPrivate />
     </Switch>
   );
 }

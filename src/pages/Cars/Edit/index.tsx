@@ -1,5 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import api from '../../../services/api';
 import { toast } from 'react-toastify';
 
@@ -8,8 +7,17 @@ import {
   InputsCard, Input, Button
 } from './styles';
 
-const CarsNew = () => {
-  const history = useHistory();
+interface Car {
+  _id: string;
+  title: string;
+  brand: string;
+  age: number;
+  price: string;
+}
+
+const CarsEdit = (props: any) => {
+
+  const { id } = props.match.params;
 
   const [formData, setFormData] = useState({
     title: '',
@@ -18,13 +26,20 @@ const CarsNew = () => {
     age: 0
   });
 
+  useEffect(() => {
+    api.get<Car>(`cars/${id}`)
+      .then(car => {
+        delete car.data._id;
+        setFormData(car.data)
+      });
+  }, [])
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     try {
-      await api.post('cars', formData);
-      toast.success("Carro criado com sucesso!");
-      history.push('/');
+      await api.put(`cars/${id}`, formData);
+      toast.success("Carro editado com sucesso!");
     }
     catch (error) {
       console.log(error)
@@ -45,7 +60,7 @@ const CarsNew = () => {
             <BreadcrumbsLink to="/">Lista de carros</BreadcrumbsLink>
           </li>
           <BreadcrumbsDivider> / </BreadcrumbsDivider>
-          <BreadcrumbsDisabled>Novo carro</BreadcrumbsDisabled>
+          <BreadcrumbsDisabled>Editar carro</BreadcrumbsDisabled>
         </Breadcrumbs>
 
         <InputsCard>
@@ -57,6 +72,7 @@ const CarsNew = () => {
                 id="title"
                 name="title"
                 placeholder="Nome do carro"
+                value={formData.title}
                 onChange={handleInputChange}
                 required
               />
@@ -68,6 +84,7 @@ const CarsNew = () => {
                 name="brand"
                 id="brand"
                 placeholder="Marca do carro"
+                value={formData.brand}
                 onChange={handleInputChange}
                 required
               />
@@ -79,6 +96,7 @@ const CarsNew = () => {
                 name="age"
                 id="age"
                 placeholder="Idade do carro"
+                value={formData.age}
                 onChange={handleInputChange}
                 required
               />
@@ -90,6 +108,7 @@ const CarsNew = () => {
                 name="price"
                 id="price"
                 placeholder="Preço do carro"
+                value={formData.price}
                 onChange={handleInputChange}
                 required
               />
@@ -107,4 +126,4 @@ const CarsNew = () => {
   )
 }
 
-export default CarsNew;
+export default CarsEdit;

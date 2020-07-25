@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+interface Modal {
+  active: boolean;
+}
+
 export const Container = styled.div`
   padding: 30px 15px;
   min-height: calc(100vh - 123px);
@@ -144,11 +148,71 @@ export const Table = styled.table`
   }
 `;
 
-export const ButtonEdit = styled(Link)`
+export const ButtonEdit = styled.span`
+  cursor: pointer;
   color: #4caf50;
 `;
 
-export const ButtonDelete = styled(Link)`
+export const ButtonDelete = styled.span`
+  cursor: pointer;
   color: #f44336;
   margin-left: 20px;
+`;
+
+export const Modal = styled.div<Modal>`
+  display: ${props => props.active ? 'block' : 'none'};
+  position: fixed; 
+  z-index: 100; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0); 
+	background-color: rgba(0,0,0,0.4);
+	
+	@media(min-width: 1024px) {
+  	padding-top: 100px;
+	}
+`;
+
+export const ModalContent = styled.div`
+  border-radius: 6px;
+	background-color: #fff;
+  z-index: 200; 
+	margin: auto;
+	width: 30%;
+	margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+	svg {
+    font-size: 80px;
+    color: var(--blue-lighter);
+    margin: 30px 0 30px;
+	}
+
+	h1 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 30px;
+	}
+
+  button, span {
+    cursor: pointer;
+    border: 0;
+    border-radius: .25em;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+    background: var(--blue);
+    margin-bottom: 30px;
+  }
+
+  span {
+    margin-left: 20px;
+    background: #aaa;
+  }
 `;
