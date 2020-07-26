@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ChangeEvent } from 'react';
 import api from '../../../services/api'
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -6,8 +6,8 @@ import { toast } from 'react-toastify';
 import { FaTrash, FaPencilAlt, FaPlus, FaArrowRight, FaRegQuestionCircle } from 'react-icons/fa';
 
 import {
-  Container, Breadcrumbs, BreadcrumbsDisabled, Modal, ModalContent,
-  ActionCard, ActionCardContent, ActionCardLogo, ActionCardText,
+  Container, Breadcrumbs, BreadcrumbsDisabled, Modal, ModalContent, BreadcrumbsLink, BreadcrumbsDivider,
+  ActionWrapper, ActionCard, ActionCardContent, ActionCardLogo, ActionCardText, Input,
   TableCard, TableCardContent, Table, ButtonEdit, ButtonDelete
 } from './styles';
 
@@ -25,6 +25,7 @@ const CarsIndex = () => {
   const history = useHistory();
 
   const [cars, setCars] = useState<Car[]>([])
+  const [filteredCars, setFilteredCars] = useState<Car[]>([])
   const [carToDelete, setCarToDelete] = useState<string>('')
 
   useEffect(() => {
@@ -33,9 +34,9 @@ const CarsIndex = () => {
 
   async function refreshCars() {
     try {
-      const carsPayload = await api.get<Car[]>('cars');
+      const carsUnformatted = await api.get<Car[]>('cars');
 
-      const cars = carsPayload.data.map(car => {
+      const carsPayload = carsUnformatted.data.map(car => {
         const price = parseFloat(car.price).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
 
         return {
@@ -44,12 +45,31 @@ const CarsIndex = () => {
         }
       });
 
-      setCars(cars);
+      setCars(carsPayload);
+      setFilteredCars(carsPayload);
     }
     catch (error) {
       console.log(error)
       toast.error('Tente novamente mais tarde...');
     }
+  }
+
+  async function handleSearch(e: ChangeEvent<HTMLInputElement>) {
+    const { value } = e.target;
+
+    if (!value) {
+      setFilteredCars(cars);
+      return;
+    }
+
+    const carsPayload = cars.filter(car => {
+      const title = car.title.toLowerCase().trim();
+      const search = value.toLowerCase().trim();
+      const data = title.indexOf(search) >= 0 ? car : null
+
+      return data;
+    })
+    setFilteredCars(carsPayload);
   }
 
   function handleEdit(id: string) {
@@ -73,22 +93,36 @@ const CarsIndex = () => {
     <div id="page-cars-list">
       <Container>
         <Breadcrumbs>
-          <BreadcrumbsDisabled> Lista de carros </BreadcrumbsDisabled>
+          <li>
+            <BreadcrumbsLink to="/">Início</BreadcrumbsLink>
+          </li>
+          <BreadcrumbsDivider> / </BreadcrumbsDivider>
+          <BreadcrumbsDisabled>Lista de carros</BreadcrumbsDisabled>
         </Breadcrumbs>
 
-        <ActionCard>
-          <ActionCardContent>
-            <Link to="/cars/new">
-              <ActionCardLogo>
-                <FaPlus />
-              </ActionCardLogo>
-              <ActionCardText>
-                <span>Adicionar novo carro</span>
-                <FaArrowRight />
-              </ActionCardText>
-            </Link>
-          </ActionCardContent>
-        </ActionCard>
+        <ActionWrapper>
+          <ActionCard>
+            <ActionCardContent>
+              <Link to="/cars/new">
+                <ActionCardLogo>
+                  <FaPlus />
+                </ActionCardLogo>
+                <ActionCardText>
+                  <span>Adicionar novo carro</span>
+                  <FaArrowRight />
+                </ActionCardText>
+              </Link>
+            </ActionCardContent>
+          </ActionCard>
+
+          <Input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Pesquisar por carros"
+            onChange={handleSearch}
+          />
+        </ActionWrapper>
 
         <TableCard>
           <TableCardContent>
@@ -104,7 +138,7 @@ const CarsIndex = () => {
               </thead>
               <tbody>
                 {
-                  cars.map(car => (
+                  filteredCars.map(car => (
                     <tr key={car._id}>
                       <td>{car.title}</td>
                       <td>{car.brand}</td>

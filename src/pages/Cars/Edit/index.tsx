@@ -32,7 +32,7 @@ const CarsEdit = (props: any) => {
         delete car.data._id;
         setFormData(car.data)
       });
-  }, [])
+  }, [id]);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -57,7 +57,11 @@ const CarsEdit = (props: any) => {
       <Container>
         <Breadcrumbs>
           <li>
-            <BreadcrumbsLink to="/">Lista de carros</BreadcrumbsLink>
+            <BreadcrumbsLink to="/">Início</BreadcrumbsLink>
+          </li>
+          <BreadcrumbsDivider> / </BreadcrumbsDivider>
+          <li>
+            <BreadcrumbsLink to="/cars">Lista de carros</BreadcrumbsLink>
           </li>
           <BreadcrumbsDivider> / </BreadcrumbsDivider>
           <BreadcrumbsDisabled>Editar carro</BreadcrumbsDisabled>

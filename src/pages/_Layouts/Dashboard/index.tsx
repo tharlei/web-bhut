@@ -27,13 +27,13 @@ const Dashboard = (props: Props) => {
       <Nav>
         <WrapperImage>
           <Link to="/">
-            <img src={logo} alt='BHUT' />
+            <img src={logo} alt='logo' />
           </Link>
         </WrapperImage>
         <WrapperItems>
           <List>
             <Item className="active">
-              <Link to="/">
+              <Link to="/cars">
                 <FaCar />
                 <p>Carros</p>
               </Link>

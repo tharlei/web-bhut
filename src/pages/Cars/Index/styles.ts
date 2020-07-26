@@ -38,6 +38,13 @@ export const BreadcrumbsDisabled = styled.li`
   color: rgba(0,0,0,.38);
 `;
 
+export const ActionWrapper = styled.div`
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const ActionCard = styled.div`
   display: flex;
   padding: 36px 0 36px 0;
@@ -92,6 +99,25 @@ export const ActionCardText = styled.div`
   }
 `;
 
+export const Input = styled.input`
+  margin: 10px 0 25px;
+  width: 20%;
+  padding: .375rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+  :focus {
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  }
+`;
 
 export const TableCard = styled.div`
   border: 0;

@@ -24,7 +24,7 @@ const CarsNew = () => {
     try {
       await api.post('cars', formData);
       toast.success("Carro criado com sucesso!");
-      history.push('/');
+      history.push('/cars');
     }
     catch (error) {
       console.log(error)
@@ -42,7 +42,11 @@ const CarsNew = () => {
       <Container>
         <Breadcrumbs>
           <li>
-            <BreadcrumbsLink to="/">Lista de carros</BreadcrumbsLink>
+            <BreadcrumbsLink to="/">Início</BreadcrumbsLink>
+          </li>
+          <BreadcrumbsDivider> / </BreadcrumbsDivider>
+          <li>
+            <BreadcrumbsLink to="/cars">Lista de carros</BreadcrumbsLink>
           </li>
           <BreadcrumbsDivider> / </BreadcrumbsDivider>
           <BreadcrumbsDisabled>Novo carro</BreadcrumbsDisabled>
