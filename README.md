@@ -1,5 +1,5 @@
 <p align="center">
- <img width="250" src="https://bhut.com.br/img/logo-contraste.svg"/>
+ <img width="250" src="https://media-exp1.licdn.com/dms/image/C4E0BAQF5DfRApjQgEQ/company-logo_200_200/0?e=2159024400&v=beta&t=2inAq-rbNH9ri73wCJfsByNdjGS5XSJZuM19kAuT4Uw"/>
 </p>
 
 <p align="center">
