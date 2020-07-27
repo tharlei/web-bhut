@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   padding: 30px 15px;
@@ -12,7 +13,9 @@ export const CardsWrapper = styled.div`
   align-items: center;
 `;
 
-export const Card = styled.div`
+export const Card = styled(Link)`
+  text-decoration: none;
+  cursor: pointer;
   height: 250px;
   width: 250px;
   border-radius: 4px;

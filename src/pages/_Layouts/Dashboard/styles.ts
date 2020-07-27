@@ -14,6 +14,10 @@ export const Nav = styled.nav`
   position: fixed;
   z-index: 6;
   box-shadow: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
+
+  @media (max-width: 960px) {
+    display: none;
+  }
 `;
 
 
@@ -122,6 +126,10 @@ export const Header = styled.header`
   top: 0;
   z-index: 5;
   box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+
+  @media (max-width: 960px) {
+    left: 0px;
+  }
 `;
 
 export const HeaderContent = styled.div`
@@ -166,9 +174,12 @@ export const OptionsIcon = styled.div`
  */
 
 export const Main = styled.main`
-  /* background: #eeeeee; */
   background: #fafafa;
   padding: 64px 0px 0px 256px;
   flex: 1 1 auto;
   max-width: 100%;
+
+  @media (max-width: 960px) {
+    padding: 64px 0px 0px 0px;
+  }
 `;

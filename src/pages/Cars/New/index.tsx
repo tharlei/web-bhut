@@ -90,7 +90,7 @@ const CarsNew = () => {
             <div>
               <label htmlFor="price">Preço</label>
               <Input
-                type="number"
+                type="text"
                 name="price"
                 id="price"
                 placeholder="Preço do carro"

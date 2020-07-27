@@ -23,7 +23,7 @@
 ## Descrição do projeto 
 
 <p align="justify">
-  Dashboard de gerencialmento de cadastros de carros
+  Dashboard de gerenciamento de cadastros de carros
 </p>
 
 ## Funcionalidades
@@ -41,6 +41,8 @@
 :heavy_check_mark: Exclusão de carro 
 
 :heavy_check_mark: Filtragem de carros
+
+:heavy_check_mark: Adaptado ao mobile
 
 ## Deploy da Aplicação :dash:
 

@@ -8,7 +8,7 @@ import { FaTrash, FaPencilAlt, FaPlus, FaArrowRight, FaRegQuestionCircle } from 
 import {
   Container, Breadcrumbs, BreadcrumbsDisabled, Modal, ModalContent, BreadcrumbsLink, BreadcrumbsDivider,
   ActionWrapper, ActionCard, ActionCardContent, ActionCardLogo, ActionCardText, Input,
-  TableCard, TableCardContent, Table, ButtonEdit, ButtonDelete
+  TableCard, TableCardContent, Table, TableTh, TableTd, ButtonEdit, ButtonDelete
 } from './styles';
 
 import { Link } from 'react-router-dom';
@@ -129,29 +129,29 @@ const CarsIndex = () => {
             <Table>
               <thead>
                 <tr>
-                  <th>Nome</th>
-                  <th>Marca</th>
-                  <th>Idade</th>
-                  <th>Preço</th>
-                  <th>Ações</th>
+                  <TableTh responsive={false}>Nome</TableTh>
+                  <TableTh responsive={false}>Marca</TableTh>
+                  <TableTh responsive={true}>Idade</TableTh>
+                  <TableTh responsive={true}>Preço</TableTh>
+                  <TableTh responsive={false}>Ações</TableTh>
                 </tr>
               </thead>
               <tbody>
                 {
                   filteredCars.map(car => (
                     <tr key={car._id}>
-                      <td>{car.title}</td>
-                      <td>{car.brand}</td>
-                      <td>{car.age}</td>
-                      <td>{car.price}</td>
-                      <td>
+                      <TableTd responsive={false}>{car.title}</TableTd>
+                      <TableTd responsive={false}>{car.brand}</TableTd>
+                      <TableTd responsive={true}>{car.age}</TableTd>
+                      <TableTd responsive={true}>{car.price}</TableTd>
+                      <TableTd responsive={false}>
                         <ButtonEdit onClick={() => handleEdit(car._id)}>
                           <FaPencilAlt />
                         </ButtonEdit>
                         <ButtonDelete onClick={() => setCarToDelete(car._id)}>
                           <FaTrash />
                         </ButtonDelete>
-                      </td>
+                      </TableTd>
                     </tr>
                   ))
                 }

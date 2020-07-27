@@ -1,9 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 interface Modal {
   active: boolean;
 }
+
+interface Responsive {
+  responsive: boolean;
+}
+
 
 export const Container = styled.div`
   padding: 30px 15px;
@@ -43,6 +48,10 @@ export const ActionWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 960px) {
+    flex-direction: column;
+  }
 `;
 
 export const ActionCard = styled.div`
@@ -101,7 +110,6 @@ export const ActionCardText = styled.div`
 
 export const Input = styled.input`
   margin: 10px 0 25px;
-  width: 20%;
   padding: .375rem;
   font-size: 1rem;
   line-height: 1.5;
@@ -148,30 +156,47 @@ export const Table = styled.table`
     border-color: inherit;
   }
 
-  thead th {
-    color: rgba(0,0,0,.6);
-    user-select: none;
-    font-size: .75rem;
-    font-weight: bold;
-    padding: 0 16px;
-    height: 24px;
-    text-align: left;
-  }
-
   tbody tr {
     position: relative;
-  }
-
-  tbody tr td {
-    padding: 12px 8px;
-    vertical-align: middle;
-    border-color: #ddd;
-    text-align: left;
   }
 
   tr {
     border-bottom: thin solid rgba(0,0,0,.12);
   }
+`;
+
+export const TableTh = styled.td<Responsive>`
+  color: rgba(0,0,0,.6);
+  user-select: none;
+  font-size: .75rem;
+  font-weight: bold;
+  padding: 0 16px;
+  height: 24px;
+  text-align: left;
+
+  ${props =>
+    props.responsive && css`
+        @media (max-width: 960px) {
+          display: none;
+        }
+      `
+  }
+`;
+
+export const TableTd = styled.th<Responsive>`
+  padding: 12px 8px;
+  vertical-align: middle;
+  border-color: #ddd;
+  text-align: left;
+
+  ${props =>
+    props.responsive && css`
+      @media (max-width: 960px) {
+        display: none;
+      }
+		`
+  }
+
 `;
 
 export const ButtonEdit = styled.span`

@@ -26,7 +26,7 @@ const Home = () => {
         {
           !loading && (
             <CardsWrapper>
-              <Card>
+              <Card to="/cars">
                 <CardIcon>
                   <FaCar />
                 </CardIcon>
@@ -35,7 +35,7 @@ const Home = () => {
                 </CardTitle>
                 <CardDescription>
                   Cadastros
-            </CardDescription>
+                </CardDescription>
               </Card>
             </CardsWrapper>
           )
